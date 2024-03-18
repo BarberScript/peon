@@ -9,6 +9,34 @@
     <h1>Панель пользователя</h1>
     <div id="userInfo"></div>
 
+    <h2>Ввод данных за неделю</h2>
+    <form id="weeklyDataForm">
+      <label for="hoursWorked">Часы работы за неделю:</label><br />
+      <input type="number" id="hoursWorked" name="hoursWorked" required /><br />
+      <label for="totalAmount">Общая сумма:</label><br />
+      <input
+        type="number"
+        id="totalAmount"
+        name="totalAmount"
+        required
+      /><br /><br />
+      <button type="submit">Отправить</button>
+    </form>
+
+    <h2>Ввод дополнительного дохода в день</h2>
+    <form id="dailyIncomeForm">
+      <label for="dailyIncome">Дополнительный доход в день:</label><br />
+      <input
+        type="number"
+        id="dailyIncome"
+        name="dailyIncome"
+        required
+      /><br /><br />
+      <button type="submit">Отправить</button>
+    </form>
+
+    <div id="weeklyIncome"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script>
       const supabaseUrl = "https://qkmqzhrosivywepflhtq.supabase.co";
@@ -58,8 +86,133 @@
         }
       }
 
+      // Функция для отправки данных за неделю
+      async function sendWeeklyData(event) {
+        event.preventDefault();
+        const hoursWorked = document.getElementById("hoursWorked").value;
+        const totalAmount = document.getElementById("totalAmount").value;
+
+        try {
+          // Отправляем данные за неделю в Supabase
+          const { error } = await supabaseClient.from("weekly_data").insert({
+            hours_worked: hoursWorked,
+            total_amount: totalAmount,
+            user_id: supabaseClient.auth.user().id,
+          });
+
+          if (error) {
+            console.error("Ошибка отправки данных за неделю:", error.message);
+          } else {
+            console.log("Данные за неделю успешно отправлены");
+            // Очистим поля ввода после успешной отправки данных
+            document.getElementById("hoursWorked").value = "";
+            document.getElementById("totalAmount").value = "";
+
+            // После отправки данных за неделю обновим общий доход за неделю
+            updateWeeklyIncome();
+          }
+        } catch (error) {
+          console.error("Ошибка отправки данных за неделю:", error.message);
+        }
+      }
+
+      // Функция для отправки дополнительного дохода в день
+      async function sendDailyIncome(event) {
+        event.preventDefault();
+        const dailyIncome = document.getElementById("dailyIncome").value;
+
+        try {
+          // Отправляем дополнительный доход в день в Supabase
+          const { error } = await supabaseClient.from("daily_income").insert({
+            daily_income: dailyIncome,
+            user_id: supabaseClient.auth.user().id,
+          });
+
+          if (error) {
+            console.error(
+              "Ошибка отправки дополнительного дохода в день:",
+              error.message
+            );
+          } else {
+            console.log("Дополнительный доход в день успешно отправлен");
+            // Очистим поле ввода после успешной отправки данных
+            document.getElementById("dailyIncome").value = "";
+
+            // После отправки дополнительного дохода в день обновим общий доход за неделю
+            updateWeeklyIncome();
+          }
+        } catch (error) {
+          console.error(
+            "Ошибка отправки дополнительного дохода в день:",
+            error.message
+          );
+        }
+      }
+
+      // Функция для обновления общего дохода за неделю
+      async function updateWeeklyIncome() {
+        try {
+          // Загружаем данные за неделю из Supabase
+          const { data: weeklyData, error: weeklyError } = await supabaseClient
+            .from("weekly_data")
+            .select("SUM(total_amount) as total_amount")
+            .eq("user_id", supabaseClient.auth.user().id)
+            .single();
+
+          if (weeklyError) {
+            console.error(
+              "Ошибка загрузки данных за неделю:",
+              weeklyError.message
+            );
+          } else {
+            const totalWeeklyAmount = weeklyData.total_amount || 0;
+
+            // Загружаем данные о дополнительном доходе в день из Supabase
+            const { data: dailyIncomeData, error: dailyIncomeError } =
+              await supabaseClient
+                .from("daily_income")
+                .select("SUM(daily_income) as total_daily_income")
+                .eq("user_id", supabaseClient.auth.user().id)
+                .single();
+
+            if (dailyIncomeError) {
+              console.error(
+                "Ошибка загрузки данных о дополнительном доходе в день:",
+                dailyIncomeError.message
+              );
+            } else {
+              const totalDailyIncome = dailyIncomeData.total_daily_income || 0;
+              const totalIncome = totalWeeklyAmount + totalDailyIncome;
+
+              // Отображаем общий доход за неделю на странице
+              document.getElementById("weeklyIncome").innerHTML = `
+              <h2>Общий доход за неделю:</h2>
+              <p>Из недельного дохода: $${totalWeeklyAmount}</p>
+              <p>Из дополнительного дохода в день: $${totalDailyIncome}</p>
+              <p>Итого: $${totalIncome}</p>
+            `;
+            }
+          }
+        } catch (error) {
+          console.error(
+            "Ошибка обновления общего дохода за неделю:",
+            error.message
+          );
+        }
+      }
+
       // Вызываем функцию получения информации о пользователе при загрузке страницы
       fetchUserInfo();
+
+      // Добавляем обработчик события для отправки данных за неделю при отправке формы
+      document
+        .getElementById("weeklyDataForm")
+        .addEventListener("submit", sendWeeklyData);
+
+      // Добавляем обработчик события для отправки дополнительного дохода в день при отправке формы
+      document
+        .getElementById("dailyIncomeForm")
+        .addEventListener("submit", sendDailyIncome);
     </script>
   </body>
 </html>
