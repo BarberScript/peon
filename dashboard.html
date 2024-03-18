@@ -18,24 +18,43 @@
 
       // Функция для получения информации о текущем пользователе
       async function fetchUserInfo() {
-        // Проверяем, сохранён ли пользователь в локальном хранилище
-        const isLoggedIn = localStorage.getItem("isLoggedIn");
-        if (isLoggedIn === "true") {
-          // Получаем информацию о пользователе из локального хранилища
-          const user = JSON.parse(localStorage.getItem("user"));
-          if (user) {
-            // Отображаем информацию о пользователе на странице
-            document.getElementById("userInfo").innerHTML = `
-            <p>Привет, ${user.email}!</p>
-            <p>Ваш ID: ${user.id}</p>
-            <!-- Добавьте другие поля здесь по вашему усмотрению -->
-          `;
+        // Получаем текущего пользователя
+        const user = supabaseClient.auth.user();
+
+        // Если пользователь авторизован
+        if (user) {
+          try {
+            // Загружаем информацию о пользователе из Supabase
+            const { data, error } = await supabaseClient
+              .from("users")
+              .select("*")
+              .eq("id", user.id)
+              .single();
+
+            // Если удалось загрузить информацию о пользователе
+            if (data) {
+              // Отображаем информацию о пользователе на странице
+              document.getElementById("userInfo").innerHTML = `
+              <p>Привет, ${user.email}!</p>
+              <p>Ваш ID: ${user.id}</p>
+              <p>Ваше имя: ${data.name}</p>
+              <!-- Добавьте другие поля здесь по вашему усмотрению -->
+            `;
+            } else {
+              console.error(
+                "Ошибка загрузки информации о пользователе:",
+                error
+              );
+            }
+          } catch (error) {
+            console.error(
+              "Ошибка загрузки информации о пользователе:",
+              error.message
+            );
           }
         } else {
-          // Если пользователь не сохранён в локальном хранилище, загружаем содержимое страницы входа
-          const response = await fetch("index.html");
-          const html = await response.text();
-          document.body.innerHTML = html;
+          // Если пользователь не авторизован, перенаправляем на страницу входа
+          window.location.href = "index.html";
         }
       }
 
