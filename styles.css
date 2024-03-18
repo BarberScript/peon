@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+}
+
+.underline {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.1rem;
+  color: #0284c7;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main {
+  max-width: 400px;
+  /*border: 1px solid blue;*/
+}
+
+header {
+  margin: 10px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  line-height: normal;
+  align-items: center;
+}
+
+header img {
+  max-height: 50px;
+  max-width: 50px;
+}
+
+footer {
+  max-width: 400px;
+  margin: 10px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.btn-magic {
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: #0284c7;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-magic:hover {
+  background-color: #f45e0d;
+}
+#calculatorContainer {
+  border-radius: 15px;
+  box-shadow: 0px 0px 2px 1px #787f8a;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.styledInput {
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.styledInput[type="number"]::-webkit-inner-spin-button,
+.styledInput[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#salaryForm {
+  display: grid;
+}
+#resultsContainer {
+  border-radius: 15px;
+  box-shadow: 0px 0px 2px 1px #787f8a;
+  margin: 10px;
+  padding: 10px;
+}
+
+#resultsContainer h2 {
+  text-align: center;
+}
+#chartContainer {
+  /*border: 1px solid gray;*/
+  border-radius: 15px;
+  box-shadow: 0px 0px 2px 1px #787f8a;
+  margin: 10px;
+  padding: 10px;
+}
+
+.header {
+  font-size: 3rem;
+  text-align: center;
+  color: #000000;
+  background-image: linear-gradient(18deg, #030303, #00ffff);
+  background-clip: text;
+  color: transparent;
+  animation: hue 10s infinite linear;
+}
+
+@keyframes hue {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(-360deg);
+  }
+}

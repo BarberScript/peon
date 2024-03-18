@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+  </head>
+  <body>
+    <h1>Панель пользователя</h1>
+    <div id="userInfo"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script>
+      const supabaseUrl = "https://qkmqzhrosivywepflhtq.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFrbXF6aHJvc2l2eXdlcGZsaHRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA3Nzk1NjUsImV4cCI6MjAyNjM1NTU2NX0.8QjJ1W7X0MTS-kPkSr2MzuM3Jjrq8F4H6EYQBEa5a7o";
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+      // Функция для получения информации о текущем пользователе
+      async function fetchUserInfo() {
+        // Проверяем, сохранён ли пользователь в локальном хранилище
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn === "true") {
+          // Получаем информацию о пользователе из локального хранилища
+          const user = JSON.parse(localStorage.getItem("user"));
+          if (user) {
+            // Отображаем информацию о пользователе на странице
+            document.getElementById("userInfo").innerHTML = `
+            <p>Привет, ${user.email}!</p>
+            <p>Ваш ID: ${user.id}</p>
+            <!-- Добавьте другие поля здесь по вашему усмотрению -->
+          `;
+          }
+        } else {
+          // Если пользователь не сохранён в локальном хранилище, загружаем содержимое страницы входа
+          const response = await fetch("index.html");
+          const html = await response.text();
+          document.body.innerHTML = html;
+        }
+      }
+
+      // Вызываем функцию получения информации о пользователе при загрузке страницы
+      fetchUserInfo();
+    </script>
+  </body>
+</html>
