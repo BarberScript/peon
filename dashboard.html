@@ -47,7 +47,7 @@
       // Функция для получения информации о текущем пользователе
       async function fetchUserInfo() {
         // Получаем текущего пользователя
-        const user = supabaseClient.auth.user();
+        const user = supabaseClient.auth.user;
 
         // Если пользователь авторизован
         if (user) {
@@ -97,7 +97,7 @@
           const { error } = await supabaseClient.from("weekly_data").insert({
             hours_worked: hoursWorked,
             total_amount: totalAmount,
-            user_id: supabaseClient.auth.user().id,
+            user_id: supabaseClient.auth.user.id,
           });
 
           if (error) {
@@ -125,7 +125,7 @@
           // Отправляем дополнительный доход в день в Supabase
           const { error } = await supabaseClient.from("daily_income").insert({
             daily_income: dailyIncome,
-            user_id: supabaseClient.auth.user().id,
+            user_id: supabaseClient.auth.user.id,
           });
 
           if (error) {
@@ -156,7 +156,7 @@
           const { data: weeklyData, error: weeklyError } = await supabaseClient
             .from("weekly_data")
             .select("SUM(total_amount) as total_amount")
-            .eq("user_id", supabaseClient.auth.user().id)
+            .eq("user_id", supabaseClient.auth.user.id)
             .single();
 
           if (weeklyError) {
@@ -172,7 +172,7 @@
               await supabaseClient
                 .from("daily_income")
                 .select("SUM(daily_income) as total_daily_income")
-                .eq("user_id", supabaseClient.auth.user().id)
+                .eq("user_id", supabaseClient.auth.user.id)
                 .single();
 
             if (dailyIncomeError) {
