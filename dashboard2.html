@@ -33,19 +33,6 @@
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFrbXF6aHJvc2l2eXdlcGZsaHRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA3Nzk1NjUsImV4cCI6MjAyNjM1NTU2NX0.8QjJ1W7X0MTS-kPkSr2MzuM3Jjrq8F4H6EYQBEa5a7o";
       const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
-      // Функция для проверки аутентификации пользователя
-      async function checkAuthentication() {
-        const user = supabaseClient.auth.user();
-        if (!user) {
-          // Если пользователь не аутентифицирован, перенаправляем его на страницу входа
-          window.location.href = "index.html";
-        } else {
-          // Если пользователь аутентифицирован, загружаем данные
-          fetchUserInfo();
-        }
-      }
-
-      // Функция для загрузки информации о пользователе
       async function fetchUserInfo() {
         const user = supabaseClient.auth.user();
         if (user) {
@@ -79,7 +66,6 @@
         }
       }
 
-      // Функция для отправки данных за неделю
       async function sendWeeklyData(event) {
         event.preventDefault();
         const weeklyAmount = parseFloat(
@@ -111,7 +97,6 @@
         }
       }
 
-      // Функция для отправки дополнительного дохода в день
       async function sendDailyIncome(event) {
         event.preventDefault();
         const dailyIncome = parseFloat(
@@ -145,7 +130,7 @@
         }
       }
 
-      checkAuthentication();
+      fetchUserInfo();
 
       document
         .getElementById("weeklyDataForm")
