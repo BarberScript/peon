@@ -93,6 +93,11 @@ ul {
   margin: 10px;
   padding: 10px;
 }
+#hourlySalaryResult {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.1rem;
+  color: #000000;
+}
 
 #resultsContainer h2 {
   text-align: center;

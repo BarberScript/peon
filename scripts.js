@@ -1,6 +1,7 @@
 const supabaseUrl = "https://vfzyenkbmccasevhgypr.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmenllbmtibWNjYXNldmhneXByIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDY1NTAyMDUsImV4cCI6MjAyMjEyNjIwNX0.DHkrqOGJjb4QAXaqayUfis4CtPjBW-0cnzDYg3IGubc";
+
 const { createClient } = supabase;
 const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
@@ -18,19 +19,41 @@ async function calculateSalary() {
     alert("Пожалуйста, введите корректные числа.");
     return;
   }
+
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleString();
-  const y = hours * 15.25;
-  const z = y * 2;
-  const t = sum - z;
-  const r = t - 0.6 * t;
-  const w = r + y;
-  const result = w - 0.19 * w;
+  let brut, result;
+
+  if (sum === 0 && hours === 0) {
+    brut = 38.5 * 15.25;
+    result = brut - 0.19 * brut;
+  } else {
+    const y = hours * 15.25;
+    const z = y * 2;
+    const t = sum - z;
+    const r = t - 0.6 * t;
+    const w = r + y;
+    brut = w;
+    result = w - 0.19 * w;
+  }
+
+  // Расчет почасовой оплаты
+  let hourlySalary;
+  if (sum === 0 && hours === 0) {
+    hourlySalary = 15.25;
+  } else {
+    hourlySalary = hours !== 0 ? brut / hours : 0;
+  }
+
+  if (!isFinite(hourlySalary)) {
+    // Обрабатываем случай, когда результат деления может быть бесконечным
+    hourlySalary = 0; // Или любое другое значение по вашему выбору
+  }
 
   // Запись данных в базу данных Supabase
   const { data, error } = await supabaseClient
     .from("barbercalc")
-    .upsert([{ sum, hours, result, date: formattedDate }]);
+    .upsert([{ sum, hours, result, hourlySalary, date: formattedDate }]);
 
   if (error) {
     console.error("Error saving data to Supabase:", error.message);
@@ -38,14 +61,18 @@ async function calculateSalary() {
   } else {
     displayResults();
   }
-  const hourlyResultDiv = document.getElementById("hourlySalaryResult");
-  hourlyResultDiv.innerHTML = `<strong>Hourly Salary:</strong> ${result.toFixed(
-    2
-  )}`;
+  // Отображение почасовой зарплаты в HTML
+  document.getElementById("hourlySalaryResult").textContent =
+    hourlySalary.toFixed(2);
 }
 
 function displayResults() {
   const resultsList = document.getElementById("resultsList");
+  const hourlySalaryResultContainer = document.getElementById(
+    "hourlySalaryResultContainer"
+  );
+  const hourlySalaryResult = document.getElementById("hourlySalaryResult");
+
   resultsList.innerHTML = "";
 
   // Получение данных из базы данных Supabase
@@ -63,28 +90,29 @@ function displayResults() {
         alert("Произошла ошибка при получении данных из базы данных.");
       } else {
         if (data.length > 0) {
-          // Итерация по каждой записи и создание элементов li
-          data.forEach((entry, index) => {
-            // Форматирование даты для вывода в стандартном формате
-            //const formattedDate = new Date(entry.date).toLocaleString();
+          // Получение последней записи
+          const latestEntry = data[0];
+          const { sum, hours, result, hourlySalary } = latestEntry;
 
-            // Создание элемента li с результатами
+          // Вывод результатов в список
+          data.forEach((entry, index) => {
             const listItem = document.createElement("li");
 
-            // Проверка, является ли запись третьей, и добавление класса для подчеркивания
             if (index === 1) {
-              listItem.classList.add("underline"); // Замените "underline" на ваш класс CSS для подчеркивания
+              listItem.classList.add("underline");
             }
 
-            listItem.innerHTML = `<strong>Total</strong>: ${
+            listItem.innerHTML = `<strong>Caisse</strong>: ${
               entry.sum
             }, <strong>Hours</strong>: ${
               entry.hours
             }, <strong>::</strong> ${entry.result.toFixed(2)}`;
             resultsList.appendChild(listItem);
           });
+
+          // Вывод почасовой зарплаты для последней записи в div
+          hourlySalaryResult.textContent = hourlySalary.toFixed(2);
         } else {
-          // Если база данных пуста
           const noDataItem = document.createElement("li");
           noDataItem.textContent = "База данных пуста";
           resultsList.appendChild(noDataItem);
