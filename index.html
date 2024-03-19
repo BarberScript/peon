@@ -3,92 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Supabase Auth Example</title>
+    <meta name="description" content="calculator" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="icon" href="favicon3.ico" alt="icon by Freepic" />
+    <link rel="apple-touch-icon" href="favicon4.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>Calcalatar</title>
   </head>
   <body>
-    <h1>Регистрация</h1>
-    <form id="signupForm">
-      <label for="email">Email:</label><br />
-      <input type="email" id="signupEmail" name="email" required /><br />
-      <label for="password">Пароль:</label><br />
-      <input
-        type="password"
-        id="signupPassword"
-        name="password"
-        required
-      /><br />
-      <button type="submit">Зарегистрироваться</button>
-    </form>
+    <header>
+      <h1 class="header">Calcalatar</h1>
+      <img src="./favicon3.ico" />
+    </header>
 
-    <h1>Вход</h1>
-    <form id="loginForm">
-      <label for="email">Email:</label><br />
-      <input type="email" id="loginEmail" name="email" required /><br />
-      <label for="password">Пароль:</label><br />
-      <input
-        type="password"
-        id="loginPassword"
-        name="password"
-        required
-      /><br />
-      <button type="submit">Войти</button>
-    </form>
+    <main>
+      <div id="calculatorContainer">
+        <form id="salaryForm">
+          <input
+            type="number"
+            id="sum"
+            class="styledInput"
+            placeholder="Total:"
+            required
+          />
+          <input
+            type="number"
+            id="hours"
+            class="styledInput"
+            placeholder="Hours:"
+            required
+          />
+        </form>
+        <button class="btn-magic" type="button" onclick="calculateSalary()">
+          Calcalatar
+        </button>
+      </div>
+
+      <div id="resultsContainer">
+        <ul id="resultsList">
+          <li id="welcomeMessage">Welcome!</li>
+        </ul>
+      </div>
+
+      <div id="hourlySalaryResultContainer">
+        <p>Hourly: <span id="hourlySalaryResult"></span></p>
+      </div>
+
+      <div id="chartContainer">
+        <canvas id="myChart" width="400" height="200"></canvas>
+      </div>
+    </main>
+
+    <footer>
+      <p class="copyright">Copyright @ BarberScript</p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script>
-      // Инициализация Supabase клиента
-      const supabaseUrl = "https://qkmqzhrosivywepflhtq.supabase.co";
-      const supabaseKey =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFrbXF6aHJvc2l2eXdlcGZsaHRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA3Nzk1NjUsImV4cCI6MjAyNjM1NTU2NX0.8QjJ1W7X0MTS-kPkSr2MzuM3Jjrq8F4H6EYQBEa5a7o";
-      const { createClient } = supabase;
-      const supabaseClient = createClient(supabaseUrl, supabaseKey);
-
-      document
-        .getElementById("signupForm")
-        .addEventListener("submit", async function (event) {
-          event.preventDefault();
-          const email = document.getElementById("signupEmail").value;
-          const password = document.getElementById("signupPassword").value;
-          try {
-            const { data, error } = await supabaseClient.auth.signUp({
-              email: email,
-              password: password,
-            });
-            if (error) {
-              console.error("Error signing up:", error.message);
-              // Show error message to the user
-            } else {
-              console.log("User signed up successfully:", data);
-              // Redirect or show success message
-            }
-          } catch (error) {
-            console.error("Error signing up:", error.message);
-          }
-        });
-
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", async function (event) {
-          event.preventDefault();
-          const email = document.getElementById("loginEmail").value;
-          const password = document.getElementById("loginPassword").value;
-          try {
-            const { user, error } =
-              await supabaseClient.auth.signInWithPassword({
-                email: email,
-                password: password,
-              });
-            if (error) {
-              console.error("Error signing in:", error.message);
-              // Show error message to the user
-            } else {
-              console.log("User signed in successfully:", user);
-              window.location.href = "dashboard.html"; // Перенаправляем пользователя на страницу панели пользователя
-            }
-          } catch (error) {
-            console.error("Error signing in:", error.message);
-          }
-        });
-    </script>
+    <script src="scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </body>
 </html>
