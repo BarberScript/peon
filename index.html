@@ -35,7 +35,11 @@
             required
           />
         </form>
-        <button class="btn-magic" type="button" onclick="calculateSalary()">
+        <button
+          class="btn-magic"
+          type="button"
+          onclick="calculateSalary(parseFloat(document.getElementById('com').value))"
+        >
           Okie Dokie
         </button>
       </div>
