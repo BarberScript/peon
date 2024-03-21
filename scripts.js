@@ -26,15 +26,15 @@ async function calculateSalary() {
 
   if (sum === 0 && hours === 0) {
     brut = 38.5 * 15.25;
-    result = brut - 0.19 * brut;
+    result = brut - 0.21 * brut;
   } else {
     const y = hours * 15.25;
     const z = y * 2;
     const t = sum - z;
-    const r = t - 0.6 * t;
-    const w = r + y;
+    const com = t - 0.6 * t;
+    const w = com + y;
     brut = w;
-    result = w - 0.19 * w;
+    result = w - 0.21 * w;
   }
 
   // Расчет почасовой оплаты
@@ -53,7 +53,7 @@ async function calculateSalary() {
   // Запись данных в базу данных Supabase
   const { data, error } = await supabaseClient
     .from("barbercalc")
-    .upsert([{ sum, hours, result, hourlySalary, date: formattedDate }]);
+    .upsert([{ sum, hours, result, com, hourlySalary, date: formattedDate }]);
 
   if (error) {
     console.error("Error saving data to Supabase:", error.message);
@@ -92,7 +92,7 @@ function displayResults() {
         if (data.length > 0) {
           // Получение последней записи
           const latestEntry = data[0];
-          const { sum, hours, result, hourlySalary } = latestEntry;
+          const { sum, hours, result, com, hourlySalary } = latestEntry;
 
           // Вывод результатов в список
           data.forEach((entry, index) => {
@@ -106,7 +106,9 @@ function displayResults() {
               entry.sum
             }, <strong>Hours</strong>: ${
               entry.hours
-            }, <strong>::</strong> ${entry.result.toFixed(2)}`;
+            },<strong>Commission</strong>: ${
+              entry.com
+            }, <strong>Peon</strong>: ${entry.result.toFixed(2)}`;
             resultsList.appendChild(listItem);
           });
 
