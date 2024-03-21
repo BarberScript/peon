@@ -14,6 +14,7 @@ async function calculateSalary() {
 
   const sum = parseFloat(sumInput);
   const hours = parseFloat(hoursInput);
+  const com = parseFloat(document.getElementById("com").value); // Получаем значение комиссии из элемента с id "com"
 
   if (isNaN(sum) || isNaN(hours)) {
     alert("Пожалуйста, введите корректные числа.");
