@@ -14,31 +14,38 @@ async function calculateSalary() {
 
   const sum = parseFloat(sumInput);
   const hours = parseFloat(hoursInput);
-  const com = parseFloat(document.getElementById("com").value); // Получаем значение комиссии из элемента с id "com"
+  const comElement = document.getElementById("com"); // Получаем элемент с id "com"
 
-  if (isNaN(sum) || isNaN(hours)) {
+  if (!comElement) {
+    alert("Элемент с id 'com' не найден.");
+    return;
+  }
+
+  const comValue = parseFloat(comElement.value);
+
+  if (isNaN(sum) || isNaN(hours) || isNaN(comValue)) {
     alert("Пожалуйста, введите корректные числа.");
     return;
   }
 
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleString();
-  let brut, result;
+  let brut, result, com;
 
   if (sum === 0 && hours === 0) {
     brut = 38.5 * 15.25;
     result = brut - 0.21 * brut;
+    com = 0; // Предполагая, что комиссия будет равна 0, если сумма и часы равны 0
   } else {
     const y = hours * 15.25;
     const z = y * 2;
     const t = sum - z;
-    const com = t - 0.6 * t;
+    com = t - 0.6 * t; // Вычисляем комиссию
     const w = com + y;
     brut = w;
     result = w - 0.21 * w;
   }
 
-  // Расчет почасовой оплаты
   let hourlySalary;
   if (sum === 0 && hours === 0) {
     hourlySalary = 15.25;
@@ -47,11 +54,9 @@ async function calculateSalary() {
   }
 
   if (!isFinite(hourlySalary)) {
-    // Обрабатываем случай, когда результат деления может быть бесконечным
-    hourlySalary = 0; // Или любое другое значение по вашему выбору
+    hourlySalary = 0;
   }
 
-  // Запись данных в базу данных Supabase
   const { data, error } = await supabaseClient
     .from("barbercalc")
     .upsert([{ sum, hours, result, com, hourlySalary, date: formattedDate }]);
@@ -62,7 +67,7 @@ async function calculateSalary() {
   } else {
     displayResults();
   }
-  // Отображение почасовой зарплаты в HTML
+
   document.getElementById("hourlySalaryResult").textContent =
     hourlySalary.toFixed(2);
 }
