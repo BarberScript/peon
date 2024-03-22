@@ -116,9 +116,9 @@ function displayResults() {
               entry.hours
             }<br><strong>Salaire</strong>: ${entry.result.toFixed(
               2
-            )}<br><strong>Commission</strong> ${
-              entry.com
-            }, <strong>Horaire</strong> ${entry.hourlySalary.toFixed(1)}`;
+            )}<br><strong>Commission</strong> ${entry.comtoFixed(
+              2
+            )}, <strong>Horaire</strong> ${entry.hourlySalary.toFixed(1)}`;
 
             // Добавляем созданный элемент li в список результатов
             resultsList.appendChild(listItem);
