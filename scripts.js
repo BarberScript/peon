@@ -88,9 +88,12 @@ function displayResults() {
         alert("Произошла ошибка при получении данных из базы данных.");
       } else {
         if (data.length > 0) {
-          // Получение последней записи
-          const latestEntry = data[0];
-          const { sum, hours, result, com, hourlySalary } = latestEntry;
+          // Вывод почасовой зарплаты для второй записи
+          if (data.length >= 2) {
+            const secondEntry = data[1];
+            hourlySalaryResult.textContent =
+              secondEntry.hourlySalary.toFixed(2);
+          }
 
           // Вывод результатов в список
           data.forEach((entry, index) => {
@@ -100,18 +103,16 @@ function displayResults() {
               listItem.classList.add("underline");
             }
 
+            // Разделяем вывод на две строки
             listItem.innerHTML = `<strong>Caisse</strong>: ${
               entry.sum
             }, <strong>Hours</strong>: ${
               entry.hours
-            },<strong>Commission</strong>: ${
+            }<br><strong>Commission</strong>: ${
               entry.com
             }, <strong>Peon</strong>: ${entry.result.toFixed(2)}`;
             resultsList.appendChild(listItem);
           });
-
-          // Вывод почасовой зарплаты для последней записи в div
-          hourlySalaryResult.textContent = hourlySalary.toFixed(2);
         } else {
           const noDataItem = document.createElement("li");
           noDataItem.textContent = "База данных пуста";
