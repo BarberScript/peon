@@ -84,7 +84,7 @@ function displayResults() {
     .from("barbercalc")
     .select("*")
     .order("id", { ascending: false }) // Сортировка по ID в порядке убывания
-    .limit(5) // Получение последних 5 записей
+    .limit(3) // Получение последних 5 записей
     .then(({ data, error }) => {
       if (error) {
         console.error(
