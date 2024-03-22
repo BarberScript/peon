@@ -14,14 +14,7 @@ async function calculateSalary() {
 
   const sum = parseFloat(sumInput);
   const hours = parseFloat(hoursInput);
-  const comElement = document.getElementById("com"); // Получаем элемент с id "com"
-
-  if (!comElement) {
-    alert("Элемент с id 'com' не найден.");
-    return;
-  }
-
-  const comValue = parseFloat(comElement.value);
+  
 
   if (isNaN(sum) || isNaN(hours) || isNaN(comValue)) {
     alert("Пожалуйста, введите корректные числа.");
