@@ -49,6 +49,12 @@ async function calculateSalary() {
     hourlySalary = 0;
   }
 
+  sum.toFixed(2);
+  hours.toFixed(2);
+  brut.toFixed(2);
+  result.toFixed(2);
+  hourlySalary.toFixed(2);
+
   const { data, error } = await supabaseClient
     .from("barbercalc")
     .upsert([{ sum, hours, result, com, hourlySalary, date: formattedDate }]);
@@ -104,15 +110,15 @@ function displayResults() {
             }
 
             // Разделяем вывод на две строки
-            listItem.innerHTML = `<strong>Caisse</strong>: ${
+            listItem.innerHTML = `<strong>Terminal</strong>: ${
               entry.sum
-            }, <strong>Hours</strong>: ${
+            }, <strong>Heures</strong>: ${
               entry.hours
-            }, <strong>Commission</strong>: ${
-              entry.com
-            }, <strong>::</strong> ${entry.result.toFixed(
+            }<br><strong>Salaire</strong>: ${entry.result.toFixed(
               2
-            )}, <strong>::</strong> ${entry.hourlySalary}`;
+            )}<br><strong>Commission</strong> ${
+              entry.com
+            }, <strong>Horaire</strong> ${entry.hourlySalary.toFixed(1)}`;
 
             // Добавляем созданный элемент li в список результатов
             resultsList.appendChild(listItem);
