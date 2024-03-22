@@ -110,6 +110,8 @@ function displayResults() {
               entry.hours
             }<br><strong>Commission</strong>: ${
               entry.com
+            },<strong>Hours</strong>: ${
+              entry.hourlySalary
             }, <strong>Peon</strong>: ${entry.result.toFixed(2)}`;
             resultsList.appendChild(listItem);
           });
