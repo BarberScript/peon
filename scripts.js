@@ -108,11 +108,13 @@ function displayResults() {
               entry.sum
             }, <strong>Hours</strong>: ${
               entry.hours
-            }<br><strong>Commission</strong>: ${
+            }, <strong>Commission</strong>: ${
               entry.com
-            },<strong>Hours</strong>: ${
-              entry.hourlySalary
-            }, <strong>Peon</strong>: ${entry.result.toFixed(2)}`;
+            }, <strong>::</strong> ${entry.result.toFixed(
+              2
+            )}, <strong>::</strong> ${entry.hourlySalary}`;
+
+            // Добавляем созданный элемент li в список результатов
             resultsList.appendChild(listItem);
           });
         } else {
