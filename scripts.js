@@ -14,7 +14,6 @@ async function calculateSalary() {
 
   const sum = parseFloat(sumInput);
   const hours = parseFloat(hoursInput);
-  
 
   if (isNaN(sum) || isNaN(hours) || isNaN(comValue)) {
     alert("Пожалуйста, введите корректные числа.");
