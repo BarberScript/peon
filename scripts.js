@@ -116,7 +116,7 @@ function displayResults() {
               entry.hours
             }<br><strong>Salaire</strong>: ${entry.result.toFixed(
               2
-            )}<br><strong>Commission</strong> ${entry.comtoFixed(
+            )}<br><strong>Commission</strong> ${entry.com.toFixed(
               2
             )}, <strong>Horaire</strong> ${entry.hourlySalary.toFixed(1)}`;
 
