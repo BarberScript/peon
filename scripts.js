@@ -56,7 +56,7 @@ async function calculateSalary() {
   hourlySalary.toFixed(2);
 
   const { data, error } = await supabaseClient
-    .from("barbercalc")
+    .from("peon")
     .upsert([{ sum, hours, result, com, hourlySalary, date: formattedDate }]);
 
   if (error) {
