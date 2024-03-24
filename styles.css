@@ -4,17 +4,36 @@
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
 }
+:root {
+  --background-color-light: #ffffff; /* Светлая тема */
+  --text-color-light: #000000;
+  --background-color-dark: #1f1f1f; /* Темная тема */
+  --text-color-dark: #ffffff;
+}
 
-.underline {
+body {
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dark-theme {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+.blueunderline {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
   color: #0284c7;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.redunderline {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.1rem;
+  color: #ca0505;
 }
 
 main {
@@ -36,6 +55,7 @@ header {
 header img {
   max-height: 50px;
   max-width: 50px;
+  transition: filter 0.3s ease;
 }
 
 footer {
@@ -134,4 +154,25 @@ ul {
   to {
     filter: hue-rotate(-360deg);
   }
+}
+
+#resultsList {
+  list-style-type: none;
+  padding: 0;
+  overflow-y: hidden; /* Скрыть вертикальную прокрутку */
+}
+
+#resultsList li {
+  display: none; /* Скрыть все элементы списка */
+}
+
+#resultsList li:first-child {
+  display: block; /* Показать только первый элемент списка */
+}
+#resultsContainer {
+  border-radius: 15px;
+  box-shadow: 0px 0px 2px 1px #787f8a;
+  margin: 10px;
+  padding: 10px;
+  overflow-y: scroll; /* Добавляем свойство overflow-y */
 }

@@ -7,9 +7,6 @@ const supabaseKey =
 const { createClient } = supabase;
 const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
-// Отображение результатов при загрузке страницы
-displayResults();
-
 async function saveDataToSupabase(
   sum,
   hours,
