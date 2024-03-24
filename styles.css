@@ -33,7 +33,6 @@ body {
 .redunderline {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
-  color: #ca0505;
 }
 
 main {
@@ -133,6 +132,16 @@ ul {
   box-shadow: 0px 0px 2px 1px #787f8a;
   margin: 10px;
   padding: 10px;
+}
+
+#hourlySalaryResultContainer p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.what {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.1rem;
 }
 
 .header {
