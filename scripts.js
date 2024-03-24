@@ -61,7 +61,7 @@ async function calculateSalary() {
 
   if (error) {
     console.error("Error saving data to Supabase:", error.message);
-    alert("Произошла ошибка при записи данных в базу данных.");
+    alert("Произошла ошибка при записи данных в базу данных!");
   } else {
     displayResults();
   }
