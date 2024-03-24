@@ -81,7 +81,7 @@ function displayResults() {
 
   // Получение данных из базы данных Supabase
   supabaseClient
-    .from("barbercalc")
+    .from("peon")
     .select("*")
     .order("id", { ascending: false }) // Сортировка по ID в порядке убывания
     .limit(3) // Получение последних 5 записей
@@ -134,7 +134,7 @@ function displayResults() {
 
 async function fetchResults() {
   const { data, error } = await supabaseClient
-    .from("barbercalc")
+    .from("peon")
     .select("sum, hours, result, date")
     .order("id", { ascending: true }) // Сортировка по ID в порядке убывания
     .limit(10);
