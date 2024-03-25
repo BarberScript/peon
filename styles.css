@@ -110,7 +110,7 @@ ul {
     left: 50%;
     width: 200%;
     height: 200%;
-    background-color: rgba(32, 6, 110, 0.5);
+    background: rgba(255, 255, 255, 0.3); /* Цвет риппла */
     border-radius: 50%;
     transform: translate(-50%, -50%);
     animation: rippleEffect 0.5s linear;
