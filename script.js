@@ -27,30 +27,6 @@ function toggleTheme() {
   }
 }
 
-// Находим кнопку
-const rippleButton = document.getElementById("rippleButton");
-
-// Добавляем обработчик события для клика
-rippleButton.addEventListener("click", function (event) {
-  // Получаем координаты клика относительно кнопки
-  const x = event.pageX - this.offsetLeft;
-  const y = event.pageY - this.offsetTop;
-
-  // Создаем элемент для эффекта риппла
-  const ripple = document.createElement("span");
-  ripple.classList.add("ripple");
-  ripple.style.left = x + "px";
-  ripple.style.top = y + "px";
-
-  // Добавляем элемент в кнопку
-  this.appendChild(ripple);
-
-  // Удаляем элемент через небольшую задержку
-  setTimeout(() => {
-    ripple.remove();
-  }, 500); // Время анимации риппла
-});
-
 async function calculateSalary() {
   const sumInput = document.getElementById("sum").value;
   const hoursInput = document.getElementById("hours").value;
