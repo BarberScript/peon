@@ -15,7 +15,41 @@ function toggleTheme() {
   } else {
     themeToggle.src = "./favicon6.ico";
   }
+  // Получаем ссылку на мета-тег
+  const statusBarMeta = document.getElementById("statusBarStyle");
+
+  // Если тема светлая, устанавливаем стиль строки состояния черным
+  if (document.body.classList.contains("dark-theme")) {
+    statusBarMeta.setAttribute("content", "black");
+  } else {
+    // Если тема тёмная, устанавливаем стиль строки состояния белым
+    statusBarMeta.setAttribute("content", "white");
+  }
 }
+
+// Находим кнопку
+const rippleButton = document.getElementById("rippleButton");
+
+// Добавляем обработчик события для клика
+rippleButton.addEventListener("click", function (event) {
+  // Получаем координаты клика относительно кнопки
+  const x = event.pageX - this.offsetLeft;
+  const y = event.pageY - this.offsetTop;
+
+  // Создаем элемент для эффекта риппла
+  const ripple = document.createElement("span");
+  ripple.classList.add("ripple");
+  ripple.style.left = x + "px";
+  ripple.style.top = y + "px";
+
+  // Добавляем элемент в кнопку
+  this.appendChild(ripple);
+
+  // Удаляем элемент через небольшую задержку
+  setTimeout(() => {
+    ripple.remove();
+  }, 500); // Время анимации риппла
+});
 
 async function calculateSalary() {
   const sumInput = document.getElementById("sum").value;
@@ -96,7 +130,7 @@ async function displayResults() {
       .from("peon")
       .select("*")
       .order("id", { ascending: false })
-      .limit(2);
+      .limit(3);
 
     if (error) {
       console.error("Ошибка при получении данных из Supabase:", error.message);
@@ -106,6 +140,8 @@ async function displayResults() {
 
     // Очистка списка перед обновлением
     resultsList.innerHTML = "";
+    resultsList2.innerHTML = ""; // Добавлено для второго списка
+    resultsList3.innerHTML = "";
 
     // Вывод почасовой зарплаты для второй записи
     if (data.length >= 2) {
@@ -144,8 +180,15 @@ async function displayResults() {
       )}, <strong>$</strong>: ${entry.hourlySalary.toFixed(2)}
       <br><strong>TOTAL</strong>: ${entry.ADtotal.toFixed(2)}`;
 
-      // Добавление элемента в список результатов
-      resultsList.appendChild(listItem);
+      if (index < 1) {
+        resultsList.appendChild(listItem);
+      } else if (index < 2) {
+        const listItem2 = listItem.cloneNode(true); // Создание копии элемента
+        resultsList2.appendChild(listItem2); // Добавление копии во второй список
+      } else {
+        const listItem3 = listItem.cloneNode(true); // Создание копии элемента
+        resultsList3.appendChild(listItem3); // Добавление копии в третий список
+      }
     });
   } catch (error) {
     console.error("Ошибка при отображении результатов:", error.message);
@@ -174,18 +217,18 @@ function createChart(results) {
       labels: labels,
       datasets: [
         {
-          label: "Result",
+          label: "Net",
           data: data,
           fill: false,
           borderColor: "#0284C7",
-          borderWidth: 1,
+          borderWidth: 2,
         },
         {
-          label: "ADtotal",
+          label: "Net",
           data: ADtotalData,
           fill: false,
           borderColor: "#FF5733",
-          borderWidth: 1,
+          borderWidth: 2,
         },
       ],
     },

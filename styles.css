@@ -25,6 +25,20 @@ body {
   background-color: var(--background-color-dark);
   color: var(--text-color-dark);
 }
+.dark-theme .styledInput {
+  background-color: #2b2b2b; /* Серый цвет фона */
+  color: white; /* Белый цвет текста */
+  border-color: white; /* Белая рамка */
+}
+
+/* Убираем тень у поля ввода в тёмной теме */
+.dark-theme .styledInput {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+.dark-theme main > * {
+  background-color: #252525; /* Серый цвет фона */
+  color: white; /* Белый цвет текста */
+}
 
 .blueunderline {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -81,6 +95,37 @@ ul {
 .btn-magic:hover {
   background-color: #f45e0d;
 }
+
+/* Эффект риппла для мобильных устройств */
+@media (hover: none) and (pointer: coarse) {
+  .btn-magic {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-magic::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: rippleEffect 0.5s linear;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @keyframes rippleEffect {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+}
+
 #calculatorContainer {
   border-radius: 15px;
   box-shadow: 0px 0px 2px 1px #787f8a;
@@ -109,6 +154,18 @@ ul {
   display: grid;
 }
 #resultsContainer {
+  border-radius: 15px;
+  box-shadow: 0px 0px 2px 1px #787f8a;
+  margin: 10px;
+  padding: 10px;
+}
+#resultsContainer2 {
+  border-radius: 15px;
+  box-shadow: 0px 0px 2px 1px #787f8a;
+  margin: 10px;
+  padding: 10px;
+}
+#resultsContainer3 {
   border-radius: 15px;
   box-shadow: 0px 0px 2px 1px #787f8a;
   margin: 10px;
