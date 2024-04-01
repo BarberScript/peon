@@ -11,9 +11,9 @@ function toggleTheme() {
 
   // Проверка текущей темы и изменение иконки
   if (body.classList.contains("dark-theme")) {
-    themeToggle.src = "./favicon6-black.ico";
+    themeToggle.src = "./logo-black.ico";
   } else {
-    themeToggle.src = "./favicon6.ico";
+    themeToggle.src = "./logo.ico";
   }
   // Получаем ссылку на мета-тег
   const statusBarMeta = document.getElementById("statusBarStyle");
