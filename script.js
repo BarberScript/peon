@@ -125,7 +125,7 @@ async function displayResults() {
       const firstHourlySalary = (
         firstEntry.bigtotal / firstEntry.hours
       ).toFixed(2);
-      hourlySalaryResult.textContent = `${firstHourlySalary}...`;
+      hourlySalaryResult.textContent = `${firstHourlySalary} =/=`;
     }
 
     // Вывод почасовой зарплаты для второй записи
@@ -153,7 +153,7 @@ async function displayResults() {
       }      <br><strong>Commission</strong>: ${entry.com.toFixed(2)}
       <br><strong>Salaire</strong>: ${entry.result.toFixed(
         2
-      )}, <strong>$</strong>: ${entry.hourlySalary.toFixed(2)}
+      )}
       <br><strong>TOTAL</strong>: ${entry.ADtotal.toFixed(2)}`;
 
       if (index < 1) {

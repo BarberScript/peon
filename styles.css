@@ -3,12 +3,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
+  font-weight: 80;
   overflow-x: hidden;
 }
 :root {
   --background-color-light: #ffffff; /* Светлая тема */
   --text-color-light: #000000;
-  --background-color-dark: #1f1f1f; /* Темная тема */
+  --background-color-dark: #000000; /* Темная тема */
   --text-color-dark: #ffffff;
 }
 
@@ -19,6 +20,17 @@ body {
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  overflow: -moz-scrollbars-none; /* For Firefox */
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+body::-webkit-scrollbar {
+    display: none;
+}
+-webkit-scrollbar { /* For WebKit browsers (Chrome, Safari) */
+  display: none;
 }
 
 .dark-theme {
