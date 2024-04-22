@@ -16,6 +16,7 @@ async function saveDataToSupabase(
   hours,
   result,
   com,
+  additionalValue,
   hourlySalary,
   additionalResult,
   additionalBrut,
