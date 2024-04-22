@@ -9,7 +9,7 @@
 :root {
   --background-color-light: #ffffff; /* Светлая тема */
   --text-color-light: #000000;
-  --background-color-dark: #000000; /* Темная тема */
+  --background-color-dark: #1f1f1f; /* Темная тема */
   --text-color-dark: #ffffff;
 }
 
@@ -20,17 +20,6 @@ body {
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
-  scrollbar-width: none; /* For Firefox */
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
-  overflow: -moz-scrollbars-none; /* For Firefox */
-}
-
-/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
-body::-webkit-scrollbar {
-    display: none;
-}
--webkit-scrollbar { /* For WebKit browsers (Chrome, Safari) */
-  display: none;
 }
 
 .dark-theme {
@@ -56,17 +45,11 @@ body::-webkit-scrollbar {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
   color: #0284c7;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .redunderline {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items:  center;
 }
 
 main {
@@ -165,8 +148,7 @@ ul {
   padding: 10px;
 }
 
-#hourlySalaryResult1
-#hourlySalaryResult2 {
+#hourlySalaryResult {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
 }
@@ -182,30 +164,15 @@ ul {
   padding: 10px;
 }
 #hourlySalaryResultContainer {
-  display: flex;
-  justify-content: space-between;
   border-radius: 15px;
   box-shadow: 0px 0px 2px 1px #787f8a;
   margin: 10px;
   padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  
 }
-.hourlySalaryResult {
-  flex: 1;
-}
-.hourlySalaryResult p {
-  text-align: center;
-}
-
-.what {
+#hourlySalaryResultContainer p{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
-}
-
-
-.info-salaire {
- font-size: 18px;
-}
-
-.info-total {
- font-size: 12px;
 }

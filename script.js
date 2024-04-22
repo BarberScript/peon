@@ -1,6 +1,12 @@
-// script.js
-
 let myChart;
+
+function showError() {
+  const inputs = document.querySelectorAll('input');
+  
+  inputs.forEach(function(input) {
+      input.style.backgroundColor = "red";
+  });
+}
 
 function toggleTheme() {
   const body = document.body;
@@ -37,7 +43,7 @@ async function calculateSalary() {
   const additionalValue = parseFloat(additionalValueInput);
 
   if (isNaN(sum) || isNaN(hours) || isNaN(additionalValue)) {
-    alert("Please enter valid numbers.");
+    showError();
     return;
   }
 
@@ -83,6 +89,7 @@ async function calculateSalary() {
     hours,
     result,
     com,
+    additionalValue,
     hourlySalary,
     additionalResult,
     additionalBrut,
@@ -96,8 +103,7 @@ async function calculateSalary() {
 }
 // Получение элементов DOM
 const resultsList = document.getElementById("resultsList");
-const hourlySalaryResult1 = document.getElementById("hourlySalaryResult1");
-const hourlySalaryResult2 = document.getElementById("hourlySalaryResult2");
+const hourlySalaryResult = document.getElementById("hourlySalaryResult");
 
 // Функция для отображения результатов
 async function displayResults() {
@@ -110,8 +116,8 @@ async function displayResults() {
       .limit(3);
 
     if (error) {
-      console.error("Ошибка при получении данных из Supabase:", error.message);
-      alert("Произошла ошибка при получении данных из базы данных.");
+      console.error("Supabase:", error.message);
+      showError();
       return;
     }
 
@@ -146,19 +152,16 @@ async function displayResults() {
         listItem.classList.add("redunderline");
       }
 
-       // Формирование содержимого элемента списка
-  listItem.innerHTML = `<div class="info-salaire"> 
-    <strong>Salaire</strong>: ${entry.result.toFixed(2)}<br>
-    <strong>TOTAL</strong>: ${entry.ADtotal.toFixed(2)}
-  </div>
-
-  <div class="info-total"> 
-  <strong>Terminal</strong>: ${
-    entry.sum
-  }, <strong>Heures</strong>: ${
-    entry.hours
-  } <br><strong>Commission</strong>: ${entry.com.toFixed(2)}
-  </div>`;
+      // Формирование содержимого элемента списка
+      listItem.innerHTML = `<strong>La casse</strong>: ${
+        entry.sum
+      }, <strong>Les heures</strong>: ${
+        entry.hours
+      }      <br><strong>La commission</strong>: ${entry.com.toFixed(2)}
+      <br><strong>Le salaire</strong>: ${entry.result.toFixed(
+        2
+      )}
+      <br><strong>La somme totale</strong>: ${entry.ADtotal.toFixed(2)}`;
 
       if (index < 1) {
         resultsList.appendChild(listItem);
@@ -171,8 +174,8 @@ async function displayResults() {
       }
     });
   } catch (error) {
-    console.error("Ошибка при отображении результатов:", error.message);
-    alert("Произошла ошибка при отображении результатов.");
+    console.error("Error:", error.message);
+    showError();
   }
 }
 
