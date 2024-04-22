@@ -56,11 +56,17 @@ body::-webkit-scrollbar {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
   color: #0284c7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .redunderline {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items:  center;
 }
 
 main {
@@ -193,4 +199,13 @@ ul {
 .what {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
+}
+
+
+.info-salaire {
+ font-size: 18px;
+}
+
+.info-total {
+ font-size: 12px;
 }

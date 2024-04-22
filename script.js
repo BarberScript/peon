@@ -146,16 +146,19 @@ async function displayResults() {
         listItem.classList.add("redunderline");
       }
 
-      // Формирование содержимого элемента списка
-      listItem.innerHTML = `<strong>Terminal</strong>: ${
-        entry.sum
-      }, <strong>Heures</strong>: ${
-        entry.hours
-      }      <br><strong>Commission</strong>: ${entry.com.toFixed(2)}
-      <br><strong>Salaire</strong>: ${entry.result.toFixed(
-        2
-      )}
-      <br><strong>TOTAL</strong>: ${entry.ADtotal.toFixed(2)}`;
+       // Формирование содержимого элемента списка
+  listItem.innerHTML = `<div class="info-salaire"> 
+    <strong>Salaire</strong>: ${entry.result.toFixed(2)}<br>
+    <strong>TOTAL</strong>: ${entry.ADtotal.toFixed(2)}
+  </div>
+
+  <div class="info-total"> 
+  <strong>Terminal</strong>: ${
+    entry.sum
+  }, <strong>Heures</strong>: ${
+    entry.hours
+  } <br><strong>Commission</strong>: ${entry.com.toFixed(2)}
+  </div>`;
 
       if (index < 1) {
         resultsList.appendChild(listItem);
