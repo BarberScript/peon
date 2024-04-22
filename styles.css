@@ -159,7 +159,8 @@ ul {
   padding: 10px;
 }
 
-#hourlySalaryResult {
+#hourlySalaryResult1
+#hourlySalaryResult2 {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
 }
@@ -176,14 +177,14 @@ ul {
 }
 #hourlySalaryResultContainer {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
+  border-radius: 15px;
+  box-shadow: 0px 0px 2px 1px #787f8a;
+  margin: 10px;
+  padding: 10px;
 }
 .hourlySalaryResult {
   flex: 1;
-  border-radius: 15px;
-  box-shadow: 0px 0px 2px 1px #787f8a;
-  margin: 2px 10px 2px 10px;
-  padding: 10px;
 }
 .hourlySalaryResult p {
   text-align: center;
@@ -192,24 +193,4 @@ ul {
 .what {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
-}
-
-.header {
-  font-size: 3rem;
-  text-align: center;
-  color: #000000;
-  background-image: linear-gradient(18deg, #ff00f2, #00ffff);
-  background-clip: text;
-  color: transparent;
-  animation: hue 10s infinite linear;
-  -webkit-text-stroke: 1px black;
-}
-
-@keyframes hue {
-  from {
-    filter: hue-rotate(0deg);
-  }
-  to {
-    filter: hue-rotate(-360deg);
-  }
 }
