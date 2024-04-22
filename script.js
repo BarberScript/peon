@@ -183,6 +183,9 @@ function createChart(results) {
   const ADtotalData = results.map((result) =>
     result.ADtotal ? result.ADtotal.toFixed(2) : 0
   );
+  const additionalValue = results.map((result) =>
+    result.additionalValue ? result.additionalValue.toFixed(2) : 0
+  );
   const ctx = document.getElementById("myChart").getContext("2d");
   if (typeof myChart === "object" && myChart !== null) {
     myChart.destroy();
@@ -251,7 +254,7 @@ function createChart(results) {
 async function fetchResults() {
   const { data, error } = await supabaseClient
     .from("peon")
-    .select("sum, hours, result, date, ADtotal")
+    .select("sum, hours, result, date, ADtotal, additionalValue")
     .order("id", { ascending: false }) // Сортировка по ID в порядке возрастания
     .limit(10);
 
@@ -265,7 +268,7 @@ async function fetchResults() {
 async function updateChart() {
   const { data, error } = await supabaseClient
     .from("peon")
-    .select("sum, hours, result, date, ADtotal")
+    .select("sum, hours, result, date, ADtotal, additionalValue")
     .order("id", { ascending: false }) // Сортировка по ID в порядке возрастания
     .limit(10);
 
