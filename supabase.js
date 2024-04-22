@@ -11,6 +11,7 @@ const supabaseClient = createClient(supabaseUrl, supabaseKey);
 displayResults();
 
 async function saveDataToSupabase(
+  additionalValue,
   sum,
   hours,
   result,
@@ -30,6 +31,7 @@ async function saveDataToSupabase(
       result,
       com,
       hourlySalary,
+      additionalValue,
       date: formattedDate,
       ADtotal: additionalResult,
       ADbrut: additionalBrut,

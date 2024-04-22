@@ -96,7 +96,8 @@ async function calculateSalary() {
 }
 // Получение элементов DOM
 const resultsList = document.getElementById("resultsList");
-const hourlySalaryResult = document.getElementById("hourlySalaryResult");
+const hourlySalaryResult1 = document.getElementById("hourlySalaryResult1");
+const hourlySalaryResult2 = document.getElementById("hourlySalaryResult2");
 
 // Функция для отображения результатов
 async function displayResults() {
@@ -125,14 +126,14 @@ async function displayResults() {
       const firstHourlySalary = (
         firstEntry.bigtotal / firstEntry.hours
       ).toFixed(2);
-      hourlySalaryResult.textContent = `${firstHourlySalary} =/=`;
+      hourlySalaryResult2.textContent = `${firstHourlySalary}`;
     }
 
     // Вывод почасовой зарплаты для второй записи
     if (data.length >= 2) {
       const secondEntry = data[1];
       const secondHourlySalary = secondEntry.hourlySalary.toFixed(2);
-      hourlySalaryResult.textContent += ` ${secondHourlySalary}`;
+      hourlySalaryResult1.textContent += ` ${secondHourlySalary}`;
     }
     // Вывод результатов в список
     data.forEach((entry, index) => {
@@ -193,17 +194,27 @@ function createChart(results) {
       labels: labels,
       datasets: [
         {
-          label: "Net",
+          label: "ZP",
           data: data,
           fill: false,
+          tension: 0.4,
           borderColor: "#0284C7",
           borderWidth: 2,
         },
         {
-          label: "Net",
+          label: "Total",
           data: ADtotalData,
           fill: false,
+          tension: 0.4,
           borderColor: "#FF5733",
+          borderWidth: 2,
+        },
+        {
+          label: "Chaj",
+          data: additionalValue,
+          fill: false,
+          tension: 0.4,
+          borderColor: "#F27702",
           borderWidth: 2,
         },
       ],

@@ -175,15 +175,18 @@ ul {
   padding: 10px;
 }
 #hourlySalaryResultContainer {
+  display: flex;
+  justify-content: space-between; 
+}
+.hourlySalaryResult {
+  flex: 1;
   border-radius: 15px;
   box-shadow: 0px 0px 2px 1px #787f8a;
-  margin: 10px;
+  margin: 2px 10px 2px 10px;
   padding: 10px;
 }
-
-#hourlySalaryResultContainer p {
-  display: flex;
-  justify-content: space-between;
+.hourlySalaryResult p {
+  text-align: center;
 }
 
 .what {
