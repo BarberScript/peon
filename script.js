@@ -1,10 +1,10 @@
 let myChart;
 
 function showError() {
-  const inputs = document.querySelectorAll('input');
-  
-  inputs.forEach(function(input) {
-      input.style.backgroundColor = "red";
+  const inputs = document.querySelectorAll("input");
+
+  inputs.forEach(function (input) {
+    input.style.backgroundColor = "red";
   });
 }
 
@@ -132,14 +132,14 @@ async function displayResults() {
       const firstHourlySalary = (
         firstEntry.bigtotal / firstEntry.hours
       ).toFixed(2);
-      hourlySalaryResult2.textContent += `${firstHourlySalary}`;
+      hourlySalaryResult2.textContent = `${firstHourlySalary}`;
     }
 
     // Вывод почасовой зарплаты для второй записи
     if (data.length >= 2) {
       const secondEntry = data[1];
       const secondHourlySalary = secondEntry.hourlySalary.toFixed(2);
-      hourlySalaryResult1.textContent += `${secondHourlySalary}`;
+      hourlySalaryResult1.textContent = `${secondHourlySalary}`;
     }
     // Вывод результатов в список
     data.forEach((entry, index) => {
@@ -158,9 +158,7 @@ async function displayResults() {
       }, <strong>Les heures</strong>: ${
         entry.hours
       }      <br><strong>La commission</strong>: ${entry.com.toFixed(2)}
-      <br><strong>Le salaire</strong>: ${entry.result.toFixed(
-        2
-      )}
+      <br><strong>Le salaire</strong>: ${entry.result.toFixed(2)}
       <br><strong>La somme totale</strong>: ${entry.ADtotal.toFixed(2)}`;
 
       if (index < 1) {
