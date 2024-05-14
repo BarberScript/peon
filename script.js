@@ -132,14 +132,14 @@ async function displayResults() {
       const firstHourlySalary = (
         firstEntry.bigtotal / firstEntry.hours
       ).toFixed(2);
-      hourlySalaryResult2.textContent = `${firstHourlySalary}`;
+      hourlySalaryResult2.textContent += `${firstHourlySalary}`;
     }
 
     // Вывод почасовой зарплаты для второй записи
     if (data.length >= 2) {
       const secondEntry = data[1];
       const secondHourlySalary = secondEntry.hourlySalary.toFixed(2);
-      hourlySalaryResult1.textContent += ` ${secondHourlySalary}`;
+      hourlySalaryResult1.textContent += `${secondHourlySalary}`;
     }
     // Вывод результатов в список
     data.forEach((entry, index) => {
@@ -208,7 +208,8 @@ function createChart(results) {
           fill: false,
           tension: 0.4,
           borderColor: "#0284C7",
-          borderWidth: 2,
+          borderWidth: 3,
+          pointRadius: 5,
         },
         {
           label: "Total",
@@ -216,7 +217,8 @@ function createChart(results) {
           fill: false,
           tension: 0.4,
           borderColor: "#FF5733",
-          borderWidth: 2,
+          borderWidth: 3,
+          pointRadius: 5,
         },
         {
           label: "Chaj",
@@ -224,7 +226,8 @@ function createChart(results) {
           fill: false,
           tension: 0.4,
           borderColor: "#F27702",
-          borderWidth: 2,
+          borderWidth: 3,
+          pointRadius: 5,
         },
       ],
     },
