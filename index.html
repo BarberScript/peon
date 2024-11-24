@@ -32,7 +32,6 @@
             class="styledInput"
             placeholder="Total, work, work"
             required
-            pattern="[0-9]*"
             min="0"
     />
         <input
@@ -41,7 +40,6 @@
             class="styledInput"
             placeholder="Additional value"
             required
-            pattern="[0-9]*"
             min="0"
     />
         <input
@@ -50,7 +48,6 @@
             class="styledInput"
             placeholder="My busy hours, leave me alone!"
             required
-            pattern="[0-9]*"
             min="0"
     />
         <button class="btn-magic" id="rippleButton" type="button" onclick="calculateSalary()">
@@ -79,6 +76,30 @@
     <div id="chartContainer">
         <canvas id="myChart" width="400" height="200"></canvas>
         <!--<button class="btn-magic" type="button" id="toggleChartButton" onclick="toggleChartType()">Toggle Chart Type</button>-->
+    </div>
+
+    <div class="container-quit">
+        <div class="elapsed-time" id="elapsedTime">
+            Loading...
+        </div>
+    </div>
+    <div class="container-energy" id="energyContainer">
+        <p>В плюсе:</p>
+            • Доброта
+            • Милосердие
+            • Отзывчивость
+            • Благотворительность
+            • Новаторство
+            • Креативное мышление
+        <br>
+        <p>В минусе:</p>
+            • Потребность страдать
+            • Жертвенные отношения с близкими
+            • Обидчивость
+            • «Меня никто не любит»
+            • Депрессия
+            • Негативное мышление
+        </p>
     </div>
 </main>
 

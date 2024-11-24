@@ -285,6 +285,25 @@ async function updateChart() {
     createChart(data.reverse()); // обращаем массив данных перед созданием графика
   }
 }
+// Дата бросания курить
+const quitDate = new Date('2024-08-27T10:00:00');
+
+// Функция для вычисления количества дней
+function calculateDays() {
+  const now = new Date(); // Текущая дата и время
+  const diff = now - quitDate; // Разница в миллисекундах
+
+  // Конвертация разницы в дни
+  const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24)); // Количество дней
+
+  // Выводим данные на страницу
+  document.getElementById('elapsedTime').innerHTML = `
+        <strong><p>${totalDays} Days</p></strong>
+      `;
+}
+
+// Выполняем вычисление при загрузке страницы
+calculateDays();
 
 window.onload = function () {
   fetchResults();

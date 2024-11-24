@@ -141,14 +141,17 @@ ul {
 
 #resultsContainer,
 #resultsContainer2,
-#resultsContainer3 {
+#resultsContainer3,
+#energyContainer,
+#elapsedTime {
   border-radius: 15px;
   box-shadow: 0px 0px 2px 1px #787f8a;
   margin: 10px;
   padding: 10px;
 }
 
-#hourlySalaryResult {
+#hourlySalaryResult,
+#elapsedTime{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
 }
@@ -163,7 +166,8 @@ ul {
   margin: 10px;
   padding: 10px;
 }
-#hourlySalaryResultContainer {
+#hourlySalaryResultContainer,
+#elapsedTime{
   border-radius: 15px;
   box-shadow: 0px 0px 2px 1px #787f8a;
   margin: 10px;
@@ -172,7 +176,9 @@ ul {
   justify-content: space-around;
   
 }
-#hourlySalaryResultContainer p{
+#hourlySalaryResultContainer p,
+#elapsedTime p,
+#energyContainer p{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
 }
